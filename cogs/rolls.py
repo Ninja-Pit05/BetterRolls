@@ -79,7 +79,7 @@ class RollsDBInterface:
         self.file = file
         self.users_if = UsersDBInterface(self.file)
 
-    def fetchall_from(self, user_id: int) -> list[Roll]|list[]:
+    def fetchall_from(self, user_id: int) -> list[Roll]|list:
         _id = self.users_if.get_surrogate(user_id)
         with ConnectionManager(self.file) as db:
             raw_rolls = db.cursor.execute(
