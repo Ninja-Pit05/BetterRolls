@@ -1,0 +1,111 @@
+[INFO] (2026-08-11 16:23:12,932) [main] - Loaded cog "rolls" successfully.
+[INFO] (2026-08-11 16:23:12,951) [main] - Loaded cog "stats" successfully.
+[INFO] (2026-08-11 16:23:16,584) [main] - Successfully logged in as Development Bot#2611
+[INFO] (2026-08-11 16:24:28,457) [main] - Loaded cog "rolls" successfully.
+[INFO] (2026-08-11 16:24:28,462) [main] - Loaded cog "stats" successfully.
+[INFO] (2026-08-11 16:24:32,483) [main] - Successfully logged in as Development Bot#2611
+[INFO] (2026-08-11 16:25:54,279) [main] - Loaded cog "rolls" successfully.
+[INFO] (2026-08-11 16:25:54,286) [main] - Loaded cog "stats" successfully.
+[INFO] (2026-08-11 16:25:57,510) [main] - Successfully logged in as Development Bot#2611
+[INFO] (2026-08-11 16:26:44,637) [main] - Loaded cog "rolls" successfully.
+[INFO] (2026-08-11 16:26:44,644) [main] - Loaded cog "stats" successfully.
+[INFO] (2026-08-11 16:26:48,099) [main] - Successfully logged in as Development Bot#2611
+[INFO] (2026-08-11 16:27:32,696) [main] - Loaded cog "rolls" successfully.
+[INFO] (2026-08-11 16:27:32,703) [main] - Loaded cog "stats" successfully.
+[INFO] (2026-08-11 16:27:36,509) [main] - Successfully logged in as Development Bot#2611
+[ERROR] (2026-08-11 17:49:23,197) [main] - Failed to compile cog "rolls": name 'UsersDBInterface' is not defined
+    Traceback (most recent call last):
+  File "C:\Users\Marli Menezes\Documents\r\projects\BetterRolls\main.py", line 67, in setup_hook
+    spec.loader.exec_module(module)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "<frozen importlib._bootstrap_external>", line 762, in exec_module
+  File "<frozen importlib._bootstrap>", line 491, in _call_with_frames_removed
+  File "C:\Users\Marli Menezes\Documents\r\projects\BetterRolls\cogs\rolls.py", line 119, in <module>
+    database = RollsDBInterface('database.db')
+  File "C:\Users\Marli Menezes\Documents\r\projects\BetterRolls\cogs\rolls.py", line 80, in __init__
+    self.users_if = UsersDBInterface(self.file)
+                    ^^^^^^^^^^^^^^^^
+NameError: name 'UsersDBInterface' is not defined. Did you mean: 'RollsDBInterface'?
+
+[INFO] (2026-08-11 17:49:23,208) [main] - Loaded cog "stats" successfully.
+[INFO] (2026-08-11 17:49:26,987) [main] - Successfully logged in as Development Bot#2611
+[INFO] (2026-08-11 17:49:49,906) [main] - Loaded cog "rolls" successfully.
+[INFO] (2026-08-11 17:49:49,912) [main] - Loaded cog "stats" successfully.
+[INFO] (2026-08-11 17:50:27,196) [main] - Successfully logged in as Development Bot#2611
+[INFO] (2026-08-11 18:39:13,387) [main] - Successfully logged in as Development Bot#2611
+[INFO] (2026-08-11 18:40:03,128) [main] - Loaded cog "rolls" successfully.
+[INFO] (2026-08-11 18:40:03,134) [main] - Loaded cog "stats" successfully.
+[INFO] (2026-08-11 18:40:06,659) [main] - Successfully logged in as Development Bot#2611
+[INFO] (2026-08-11 18:40:47,710) [main] - Loaded cog "rolls" successfully.
+[INFO] (2026-08-11 18:40:47,716) [main] - Loaded cog "stats" successfully.
+[INFO] (2026-08-11 18:40:52,153) [main] - Successfully logged in as Development Bot#2611
+[INFO] (2026-08-11 18:41:46,482) [main] - Loaded cog "rolls" successfully.
+[INFO] (2026-08-11 18:41:46,492) [main] - Loaded cog "stats" successfully.
+[INFO] (2026-08-11 18:41:49,771) [main] - Successfully logged in as Development Bot#2611
+[INFO] (2026-08-11 18:57:22,938) [main] - Loaded cog "rolls" successfully.
+[INFO] (2026-08-11 18:57:22,944) [main] - Loaded cog "stats" successfully.
+[INFO] (2026-08-11 18:57:25,950) [main] - Successfully logged in as Development Bot#2611
+[INFO] (2026-08-11 19:01:27,712) [main] - Loaded cog "rolls" successfully.
+[INFO] (2026-08-11 19:01:27,718) [main] - Loaded cog "stats" successfully.
+[INFO] (2026-08-11 19:01:31,122) [main] - Successfully logged in as Development Bot#2611
+[INFO] (2026-08-11 19:13:31,439) [main] - Loaded cog "rolls" successfully.
+[INFO] (2026-08-11 19:13:31,445) [main] - Loaded cog "stats" successfully.
+[INFO] (2026-08-11 19:13:34,963) [main] - Successfully logged in as Development Bot#2611
+[INFO] (2026-08-11 19:14:08,270) [main] - Loaded cog "rolls" successfully.
+[INFO] (2026-08-11 19:14:08,276) [main] - Loaded cog "stats" successfully.
+[INFO] (2026-08-11 19:14:12,529) [main] - Successfully logged in as Development Bot#2611
+[INFO] (2026-08-11 19:15:50,701) [main] - Loaded cog "rolls" successfully.
+[INFO] (2026-08-11 19:15:50,711) [main] - Loaded cog "stats" successfully.
+[INFO] (2026-08-11 19:15:54,706) [main] - Successfully logged in as Development Bot#2611
+[INFO] (2026-08-11 19:16:47,627) [main] - Loaded cog "rolls" successfully.
+[INFO] (2026-08-11 19:16:47,636) [main] - Loaded cog "stats" successfully.
+[INFO] (2026-08-11 19:16:50,843) [main] - Successfully logged in as Development Bot#2611
+[INFO] (2026-08-11 19:23:59,479) [main] - Loaded cog "rolls" successfully.
+[INFO] (2026-08-11 19:23:59,485) [main] - Loaded cog "stats" successfully.
+[INFO] (2026-08-11 19:24:02,581) [main] - Successfully logged in as Development Bot#2611
+[INFO] (2026-08-11 19:24:21,723) [main] - Loaded cog "rolls" successfully.
+[INFO] (2026-08-11 19:24:21,728) [main] - Loaded cog "stats" successfully.
+[INFO] (2026-08-11 19:25:03,243) [main] - Successfully logged in as Development Bot#2611
+[INFO] (2026-08-11 19:28:51,055) [main] - Loaded cog "rolls" successfully.
+[INFO] (2026-08-11 19:28:51,061) [main] - Loaded cog "stats" successfully.
+[INFO] (2026-08-11 19:28:54,139) [main] - Successfully logged in as Development Bot#2611
+[INFO] (2026-08-11 19:29:16,424) [main] - Loaded cog "rolls" successfully.
+[INFO] (2026-08-11 19:29:16,438) [main] - Loaded cog "stats" successfully.
+[INFO] (2026-08-11 19:29:55,679) [main] - Successfully logged in as Development Bot#2611
+[INFO] (2026-08-11 19:30:19,692) [main] - Loaded cog "rolls" successfully.
+[INFO] (2026-08-11 19:30:19,698) [main] - Loaded cog "stats" successfully.
+[INFO] (2026-08-11 19:30:23,027) [main] - Successfully logged in as Development Bot#2611
+[ERROR] (2026-08-11 19:33:44,501) [main] - Failed to compile cog "rolls": invalid syntax (rolls.py, line 501)
+    Traceback (most recent call last):
+  File "C:\Users\Marli Menezes\Documents\r\projects\BetterRolls\main.py", line 67, in setup_hook
+    spec.loader.exec_module(module)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "<frozen importlib._bootstrap_external>", line 758, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 896, in get_code
+  File "<frozen importlib._bootstrap_external>", line 826, in source_to_code
+  File "<frozen importlib._bootstrap>", line 491, in _call_with_frames_removed
+  File "C:\Users\Marli Menezes\Documents\r\projects\BetterRolls\cogs\rolls.py", line 501
+    /grouped_roll dice_pool1:d100 amount_pool1:1000 dice_pool2:d100 amount_pool2:10000 dice_pool3:d100 amount_pool3:100
+    ^
+SyntaxError: invalid syntax
+
+[INFO] (2026-08-11 19:33:44,510) [main] - Loaded cog "stats" successfully.
+[INFO] (2026-08-11 19:33:47,597) [main] - Successfully logged in as Development Bot#2611
+[INFO] (2026-08-11 19:34:23,460) [main] - Loaded cog "rolls" successfully.
+[INFO] (2026-08-11 19:34:23,466) [main] - Loaded cog "stats" successfully.
+[INFO] (2026-08-11 19:34:26,574) [main] - Successfully logged in as Development Bot#2611
+[INFO] (2026-08-11 19:37:05,399) [main] - Loaded cog "rolls" successfully.
+[INFO] (2026-08-11 19:37:05,405) [main] - Loaded cog "stats" successfully.
+[INFO] (2026-08-11 19:37:08,873) [main] - Successfully logged in as Development Bot#2611
+[INFO] (2026-08-11 19:41:44,593) [main] - Loaded cog "rolls" successfully.
+[INFO] (2026-08-11 19:41:44,620) [main] - Loaded cog "stats" successfully.
+[INFO] (2026-08-11 19:41:48,179) [main] - Successfully logged in as Development Bot#2611
+[INFO] (2026-08-11 19:48:01,478) [main] - Loaded cog "rolls" successfully.
+[INFO] (2026-08-11 19:48:01,502) [main] - Loaded cog "stats" successfully.
+[INFO] (2026-08-11 19:48:04,965) [main] - Successfully logged in as Development Bot#2611
+[INFO] (2026-08-11 20:00:34,275) [main] - Loaded cog "rolls" successfully.
+[INFO] (2026-08-11 20:00:34,283) [main] - Loaded cog "stats" successfully.
+[INFO] (2026-08-11 20:00:38,508) [main] - Successfully logged in as Development Bot#2611
+[INFO] (2026-08-11 20:02:37,572) [main] - Loaded cog "rolls" successfully.
+[INFO] (2026-08-11 20:02:37,587) [main] - Loaded cog "stats" successfully.
+[INFO] (2026-08-11 20:02:40,916) [main] - Successfully logged in as Development Bot#2611
