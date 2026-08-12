@@ -83,7 +83,8 @@ class RollsDBInterface:
         _id = self.users_if.get_surrogate(user_id)
         with ConnectionManager(self.file) as db:
             raw_rolls = db.cursor.execute(
-                'SELECT * FROM rolls WHERE user_id = ?',
+                '''SELECT * FROM rolls WHERE user_id = ?
+                    ORDER BY timestamp DESC''',
                 [_id]).fetchall()
             rolls = [
                         Roll(

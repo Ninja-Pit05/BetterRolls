@@ -74,7 +74,7 @@ def init_db(file: str):
                 id INTEGER PRIMARY KEY
                 , user_id INT
                 , rolltype_id INT
-                , time INT
+                , timestamp INT
                 , FOREIGN KEY (user_id) REFERENCES users(id)
                     ON DELETE CASCADE
                 , FOREIGN KEY (rolltype_id) REFERENCES rolltypes(id)
