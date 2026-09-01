@@ -1,6 +1,7 @@
 """ Utilitary code used in multiple files. """
 import discord
 from discord import ui
+from typing import Callable, Type
 
 
 class Paginator():
@@ -58,7 +59,7 @@ class Paginator():
 class NextButton(ui.Button):
     """ Paginates to next pg. """
     def __init__(self, user: discord.User, paginator: Paginator,
-                 view: ui.LayoutView):
+                 view: Type[ui.LayoutView]):
         self.user = user
         self.paginator = paginator
         self.target_view = view
@@ -74,7 +75,7 @@ class NextButton(ui.Button):
 class PreviousButton(ui.Button):
     """ Paginates to previous pg. """
     def __init__(self, user: discord.User, paginator: Paginator,
-                 view: ui.LayoutView):
+                 view: Type[ui.LayoutView]):
         self.user = user
         self.paginator = paginator
         self.target_view = view
@@ -90,7 +91,7 @@ class PreviousButton(ui.Button):
 class ReturnButton(ui.Button):
     """ Routes to previous view. """
     def __init__(self, user: discord.User, paginator: Paginator,
-                 view: ui.LayoutView):
+                 view: Type[ui.LayoutView]):
         self.user = user
         self.paginator = paginator
         self.target_view = view
