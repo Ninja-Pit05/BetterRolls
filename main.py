@@ -16,14 +16,18 @@ import traceback
 import logging
 from logging.handlers import TimedRotatingFileHandler
 from datetime import datetime
+from dotenv import load_dotenv
 
 import discord
-from discord import app_commands
+import discord
+from discord.ext import commands
 
 from db import init_db
 
-init_db('database.db')
 
+load_dotenv()
+BOT_TOKEN = os.environ.get('BOT_TOKEN')
+PREFIX = os.environ.get('PREFIX')
 
 
 logger = logging.getLogger(__name__)
@@ -38,65 +42,47 @@ logger_fh.setFormatter(logging.Formatter(LOG_FORMAT))
 # Logger's console (stream) handler
 logger_sh=logging.StreamHandler()
 logger_sh.setFormatter(logging.Formatter(LOG_FORMAT))
-
 logger.addHandler(logger_fh)
 logger.addHandler(logger_sh)
 
-class Client(discord.Client):
-    """ Custom discord Client. """
-    user: discord.ClientUser
 
-    def __init__(self, *, intents: discord.Intents): # pylint: disable=W0621
-        super().__init__(intents=intents)
-        self.tree = app_commands.CommandTree(self)
+init_db('database.db')
 
-    async def setup_hook(self):
-        # load cogs
+
+class CustomBot(commands.Bot):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    async def setup_hook(self) -> None:
         for file in os.listdir("cogs"):
             if file.endswith(".py"):
-                spec = importlib.util.find_spec(f"cogs.{file[:-3]}")
-                module = importlib.util.module_from_spec(spec)
-                try:
-                    spec.loader.exec_module(module)
-                except Exception as e: # pylint: disable=W0718
-                    e_text = traceback.format_exception(e)
-                    logger.error(
-                        'Failed to compile cog "%s": %s\n    %s',
-                        file[:-3], e, ''.join(e_text))
-                    continue
-                try:
-                    loader = getattr(module,'load')
-                except AttributeError:
-                    logger.error('Cog "%s" missing loader.', file[:-3])
-                    continue
-                try:
-                    loader(self)
-                except Exception as e: # pylint: disable=W0718
-                    e_text = traceback.format_exception(e)
-                    logger.error(
-                        'Failed to load cog "%s": %s\n    %s',
-                        file[:-3], e, ''.join(e_text))
-                    continue
-                logger.info('Loaded cog "%s" successfully.', file[:-3])
+                await bot.load_extension(f'cogs.{file[:-3]}')
         await self.tree.sync()
 
 
-
+description = """A simple discord bot that provides stats editing and dice
+rolling for rpg sessions.
+Made by Ninja. https://github.com/Ninja-Pit05/BetterRolls
+"""
 intents = discord.Intents.default()
-client = Client(intents=intents)
+intents.message_content = True
+
+bot = CustomBot(command_prefix=PREFIX,
+                description=description,
+                intents=intents)
 
 
-
-@client.event
+@bot.event
 async def on_ready():
     """ Announce succesfull connections. """
-    logger.info('Successfully logged in as %s', client.user)
+    logger.info('Successfully logged in as %s', bot.user)
 
 
-@client.tree.command()
+@bot.tree.command()
 async def ping(interaction):
     """ Let's us know the bot is on. """
     logger.info('PING! at %s', datetime.now())
     await interaction.response.send_message("Pong")
 
-client.run(BOT_TOKEN)
+
+bot.run(BOT_TOKEN)
