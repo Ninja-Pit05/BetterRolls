@@ -4,22 +4,9 @@ editing and deletion.
 from enum import Enum
 from dataclasses import dataclass
 
-class StatTypes(Enum):
-    """ Enumeration of stat types. Equivalent to the Types lookup table."""
-    Integer = 0
-    Float = 1
-    RangeInteger = 2
-    RangeFloat = 3
-    Text = 4
-    LimitedText = 5
-
-    def __getitem__(self, subscript: int):
-        """ Allows subscription of StatTypes by their values. """
-        return [self.Integer, self.Float, self.RangeInteger,
-                self.RangeFloat, self.Text, self.LimitedText][subscript]
-
 import discord
 from discord import ui
+
 from utils import Paginator, NextButton, PreviousButton, ReturnButton
 from db import ConnectionManager, UsersDBInterface
 
@@ -75,24 +62,24 @@ class Stat():
         """ validates input and returns the transformed value. """
         if self.type in [StatTypes.Integer, StatTypes.RangeInteger]:
             try:
-                value = int(value)
+                _value = int(value)
             except:
                 raise InvalidInput(f'Expected Integer, received {value}')
-            if self.type == StatType.RangeInteger:
-                if value < self.min or value > self.max:
+            if self.type == StatTypes.RangeInteger:
+                if int(_value) < self.min or int(_value) > self.max:
                     raise OutOfLimits(f'Value range from {self.min} to'
-                                      f' {self.max}. Received: {value}')
-            return value
+                                      f' {self.max}. Received: {_value}')
+            return _value
         if self.type in [StatTypes.Float, StatTypes.RangeFloat]:
             try:
-                value = float(value)
+                _value = float(value)
             except:
                 raise InvalidInput(f'Expected Float, received {value}')
             if self.type == StatTypes.RangeFloat:
-                if value < self.min or value > self.max:
+                if float(_value) < self.min or float(_value) > self.max:
                     raise OutOfLimits(f'Value range from {self.min} to'
-                                      f' {self.max}. Received: {value}')
-            return value
+                                      f' {self.max}. Received: {_value}')
+            return _value
         if self.type == StatTypes.LimitedText:
             if len(value) < self.min or len(value) > self.max:
                 raise OutOfLimits(f"Text size should be from {self.min} "
@@ -110,7 +97,7 @@ class StatsDBInterface:
         self.file = file
         self.users_if = UsersDBInterface(self.file)
 
-    def fetchall_from(self, user_id: int) -> list[Stat]|None:
+    def fetchall_from(self, user_id: int) -> list[Stat]:
         _id = self.users_if.get_surrogate(user_id)
         with ConnectionManager(self.file) as db:
             raw_stats = db.cursor.execute(
@@ -178,7 +165,7 @@ class DeepEditWindow(ui.LayoutView):
                                        component=self.label))
                 self.type = ui.Select(options=
                     [discord.SelectOption(label=type.name,
-                                          value=type.value)
+                                          value=str(type.value))
                     for type in StatTypes])
                 self.add_item(ui.Label(text='Type', component=self.type))
                 self.min = ui.TextInput(default=str(stat.min))
@@ -194,8 +181,8 @@ class DeepEditWindow(ui.LayoutView):
                 # Error handling
                 if self.type in [1,3]:
                     try:
-                        float(self.min)
-                        float(self.max)
+                        float(self.min.value)
+                        float(self.max.value)
                     except ValueError:
                         await interaction.response.send_message(
                             'Invalid min or max value. Expected Float',
@@ -204,8 +191,8 @@ class DeepEditWindow(ui.LayoutView):
                         return
                 elif self.type in [0,2]:
                     try:
-                        int(self.min)
-                        int(self.max)
+                        int(self.min.value)
+                        int(self.max.value)
                     except ValueError:
                         await interaction.response.send_message(
                             'Invalid min or max value. Expected Integer',
@@ -220,13 +207,13 @@ class DeepEditWindow(ui.LayoutView):
                         self.stop()
                         return
                     database.edit(self.stat.id, self.label.value,
-                                  self.type.values[0], self.min.value,
-                                  self.max.value)
+                                  int(self.type.values[0]), int(self.min.value),
+                                  int(self.max.value))
                     self.stop()
                     return
                 database.new(self.label.value, self.user.id,
-                             self.type.values[0], self.min.value,
-                             self.max.value)
+                             int(self.type.values[0]), int(self.min.value),
+                             int(self.max.value))
                 self.stop()
                 return
 
@@ -251,7 +238,7 @@ class DeepEditWindow(ui.LayoutView):
                 self.user = user
                 super().__init__(label='New Stat')
             async def callback(self, interaction):
-                modal = DeepEditModal(Stat(0,'Stat label',0,0,10,0,0),
+                modal = DeepEditModal(Stat(0,'Stat label',0,0,'10',0,0),
                                       self.user)
                 await interaction.response.send_modal(modal)
                 await modal.wait()
@@ -304,9 +291,9 @@ class EditStatsWindow(ui.LayoutView):
                     rang = f'min {stat.min}, max {stat.min}'
                 if stat.type in [StatTypes.Integer, StatTypes.RangeInteger]:
                     type_lb = 'Int'
-                if stat.type in [StatTypes.Float, StatTypes.RangeFloat]:
+                elif stat.type in [StatTypes.Float, StatTypes.RangeFloat]:
                     type_lb = 'Float'
-                if stat.type in [StatTypes.Text, StatTypes.LimitedText]:
+                else: #stat.type in [StatTypes.Text, StatTypes.LimitedText]
                     type_lb = 'Text'
                 self.add_item(ui.Label(text=f'Value {type_lb}. {rang}',
                     component=self.input))
@@ -365,16 +352,9 @@ class StatsWindow(ui.LayoutView):
 
 
 
-
-
-def load(client: discord.Client):
-    """Cog loader. Loads this cog to a discord.Client instance.
-
-    Args:
-        client(discord.Cient) - Client instance to bind this cog to.
-    """
-
-    @client.tree.command()
+async def setup(bot):
+    """Loads this command into the given bot instance."""
+    @bot.tree.command()
     async def stats(interaction, user: discord.User|None):
         """ Opens the stats window of a player.
 
@@ -383,6 +363,7 @@ def load(client: discord.Client):
         """
         if user is None:
             user = interaction.user
+        assert user is not None #pyright happy
         stats = database.fetchall_from(user.id)
         paginator = Paginator(stats,8)
         await interaction.response.send_message(view=StatsWindow(
