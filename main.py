@@ -54,9 +54,9 @@ class CustomBot(commands.Bot):
         super().__init__(*args, **kwargs)
 
     async def setup_hook(self) -> None:
-        for file in os.listdir("cogs"):
+        for file in os.listdir("commands"):
             if file.endswith(".py"):
-                await bot.load_extension(f'cogs.{file[:-3]}')
+                await bot.load_extension(f'commands.{file[:-3]}')
         await self.tree.sync()
 
 
