@@ -2,6 +2,7 @@ log.*
 database.db
 *.sublime-project
 *.sublime-workspace
+.env
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
