@@ -58,7 +58,7 @@ class Paginator():
 # -- Pagination buttons.
 class NextButton(ui.Button):
     """ Paginates to next pg. """
-    def __init__(self, user: discord.User, paginator: Paginator,
+    def __init__(self, user: discord.User|discord.Member, paginator: Paginator,
                  view: Type[ui.LayoutView]):
         self.user = user
         self.paginator = paginator
@@ -74,7 +74,7 @@ class NextButton(ui.Button):
 
 class PreviousButton(ui.Button):
     """ Paginates to previous pg. """
-    def __init__(self, user: discord.User, paginator: Paginator,
+    def __init__(self, user: discord.User|discord.Member, paginator: Paginator,
                  view: Type[ui.LayoutView]):
         self.user = user
         self.paginator = paginator
@@ -90,7 +90,7 @@ class PreviousButton(ui.Button):
 
 class ReturnButton(ui.Button):
     """ Routes to previous view. """
-    def __init__(self, user: discord.User, paginator: Paginator,
+    def __init__(self, user: discord.User|discord.Member, paginator: Paginator,
                  view: Type[ui.LayoutView]):
         self.user = user
         self.paginator = paginator
