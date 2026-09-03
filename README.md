@@ -57,7 +57,7 @@ Would look like:
 
 You can roll multiple dices of the same type:
 
-´?r 3d8´
+`?r 3d8`
 
 
 The dice notation used here is pretty similar to the standard dice notation used.
