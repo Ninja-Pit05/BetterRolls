@@ -512,9 +512,7 @@ async def setup(bot):
             except:
                 await ctx.channel.send(f'Invalid input(s): {e.args[0]}')
             return
-        print(parsed_exp)
         rolls = [roll_expression(child_exp) for child_exp in parsed_exp]
-        print(rolls)
 
         for roll in rolls:
             match roll.type:
